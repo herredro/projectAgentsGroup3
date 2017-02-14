@@ -1,0 +1,12 @@
+
+textures.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background-pictures-nature
+  rotate: false
+  xy: 2, 2
+  size: 2560, 1600
+  orig: 2560, 1600
+  offset: 0, 0
+  index: -1
