@@ -1,14 +1,14 @@
 package desktop;
 
-import static game.ArcadeConstants.*;
-import game.Arcade;
+import static game.AgentSimulatorConstants.*;
+import game.AgentSimulator;
 import util.PackTextures;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.Texture;
 
-public class ArcadeDesktop {
+public class AgentSimulDesktop {
 
 	public static void main(String[] args) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
@@ -18,7 +18,7 @@ public class ArcadeDesktop {
 		Texture.setEnforcePotImages(false);
 		PackTextures.run();
 
-		new LwjglApplication(new Arcade(), config);
+		new LwjglApplication(new AgentSimulator(), config);
 	}
 
 }
