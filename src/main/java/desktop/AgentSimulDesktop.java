@@ -1,12 +1,11 @@
 package desktop;
 
-import static game.AgentSimulatorConstants.*;
+import static game.AgentSimulatorConstants.screenHeight;
+import static game.AgentSimulatorConstants.screenWidth;
 import game.AgentSimulator;
-import util.PackTextures;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.Texture;
 
 public class AgentSimulDesktop {
 
@@ -15,8 +14,7 @@ public class AgentSimulDesktop {
 		config.width = screenWidth;
 		config.height = screenHeight;
 
-		Texture.setEnforcePotImages(false);
-		PackTextures.run();
+		// Texture.setEnforcePotImages(false);
 
 		new LwjglApplication(new AgentSimulator(), config);
 	}
