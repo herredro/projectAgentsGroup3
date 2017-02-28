@@ -4,7 +4,7 @@ import static game.AgentSimulatorConstants.screenHeight;
 import static game.AgentSimulatorConstants.screenWidth;
 import factorys.AgentFactory;
 import factorys.ObstacleFactory;
-import game.systems.RenderSystem;
+import game.systems.SystemsManager;
 import agentDefinitions.AbstractAgent;
 import agentDefinitions.AgentType;
 import agentDefinitions.AgentWord;
@@ -20,12 +20,12 @@ public class AgentSimulationScreen implements Screen {
 
 	private AgentWord world;
 	private OrthographicCamera camera;
+	private SystemsManager systemsManager;
 
 	public AgentSimulationScreen() {
 		this.world = new AgentWord();
 		this.camera = new OrthographicCamera(screenWidth, screenHeight);
-		RenderSystem renderSystem = new RenderSystem(camera, world);
-		world.setRenderSystem(renderSystem);
+		this.systemsManager= new SystemsManager(world, camera);
 		creatBoxBoarder();
 		addAgents(AgentType.PERSUER, 2);
 	}
@@ -66,7 +66,9 @@ public class AgentSimulationScreen implements Screen {
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
 		camera.update();
-		world.process(delta);
+
+		systemsManager.runSystemStep(delta);
+		// world.process(delta);
 
 	}
 

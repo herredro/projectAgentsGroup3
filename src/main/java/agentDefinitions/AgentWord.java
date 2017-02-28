@@ -1,8 +1,5 @@
 package agentDefinitions;
 
-import game.systems.MovementSystem;
-import game.systems.RenderSystem;
-
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.Vector2;
@@ -13,22 +10,20 @@ public class AgentWord {
 	private World physicsWorld;
 	private ArrayList<Obstacles> obstacList ;
 
-	private RenderSystem renderSystem;
-	private MovementSystem movementSystem;
+
 
 	public AgentWord() {
 		obstacList= new ArrayList<Obstacles>();
 		allAgents= new ArrayList<AbstractAgent>();
 		setPhysicsWorld(new World(new Vector2(), true));
-		movementSystem = new MovementSystem();
 		
+
 	}
 
 
 	public void process(float delta) {
-		renderSystem.renderEverything();
-		movementSystem.moveAgent(allAgents.get(0), new Vector2(50, 0));
-		physicsWorld.step(delta, 8, 3);
+
+		// physicsWorld.step(delta, 8, 3);
 
 	}
 	public ArrayList<AbstractAgent> getAllAgents() {
@@ -49,9 +44,6 @@ public class AgentWord {
 
 	}
 
-	public void setRenderSystem(RenderSystem renderSystem) {
-		this.renderSystem = renderSystem;
-	}
 
 	public World getPhysicsWorld() {
 		return physicsWorld;

@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
-public class RenderSystem {
+public class RenderSystem extends AbstractSystem {
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
 	private AgentWord world;
@@ -51,6 +51,12 @@ public class RenderSystem {
 			renderer.end();
 		}
 		end();
+	}
+
+	@Override
+	public void proccessStep(AgentWord world) {
+		renderEverything();
+
 	}
 
 }

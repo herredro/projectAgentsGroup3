@@ -15,7 +15,7 @@ public class MovementSystem extends AbstractSystem {
 
 	@Override
 	public void proccessStep(AgentWord world) {
-		moveAgent(world.getAllAgents().get(0), null);
+		moveAgent(world.getAllAgents().get(0), new Vector2(5, 5));
 
 	}
 
