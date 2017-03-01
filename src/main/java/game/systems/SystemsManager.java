@@ -2,7 +2,7 @@ package game.systems;
 
 import java.util.ArrayList;
 
-import agentDefinitions.AgentWord;
+import agentDefinitions.AgentWorld;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
@@ -10,9 +10,9 @@ public class SystemsManager {
 
 	private ArrayList<AbstractSystem> systemList;
 
-	private AgentWord world;
+	private AgentWorld world;
 
-	public SystemsManager(AgentWord world, OrthographicCamera camera) {
+	public SystemsManager(AgentWorld world, OrthographicCamera camera) {
 		this.world = world;
 		this.systemList= new ArrayList<AbstractSystem>();
 		systemList.add(new MovementSystem());

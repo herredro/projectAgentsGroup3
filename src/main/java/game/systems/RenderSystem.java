@@ -1,7 +1,7 @@
 package game.systems;
 
 import agentDefinitions.AbstractAgent;
-import agentDefinitions.AgentWord;
+import agentDefinitions.AgentWorld;
 import agentDefinitions.Obstacles;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,11 +12,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 public class RenderSystem extends AbstractSystem {
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
-	private AgentWord world;
+	private AgentWorld world;
 
 	ShapeRenderer renderer = new ShapeRenderer();
 
-	public RenderSystem(OrthographicCamera camera, AgentWord world) {
+	public RenderSystem(OrthographicCamera camera, AgentWorld world) {
 		super();
 		this.camera = camera;
 		this.world = world;
@@ -54,7 +54,7 @@ public class RenderSystem extends AbstractSystem {
 	}
 
 	@Override
-	public void proccessStep(AgentWord world) {
+	public void proccessStep(AgentWorld world) {
 		renderEverything();
 
 	}

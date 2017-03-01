@@ -7,7 +7,7 @@ import factorys.ObstacleFactory;
 import game.systems.SystemsManager;
 import agentDefinitions.AbstractAgent;
 import agentDefinitions.AgentType;
-import agentDefinitions.AgentWord;
+import agentDefinitions.AgentWorld;
 import agentDefinitions.Obstacles;
 
 import com.badlogic.gdx.Gdx;
@@ -18,12 +18,12 @@ import com.badlogic.gdx.math.Vector2;
 
 public class AgentSimulationScreen implements Screen {
 
-	private AgentWord world;
+	private AgentWorld world;
 	private OrthographicCamera camera;
 	private SystemsManager systemsManager;
 
 	public AgentSimulationScreen() {
-		this.world = new AgentWord();
+		this.world = new AgentWorld();
 		this.camera = new OrthographicCamera(screenWidth, screenHeight);
 		this.systemsManager= new SystemsManager(world, camera);
 		creatBoxBoarder();

@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class AgentWord {
+public class AgentWorld {
 	private ArrayList<AbstractAgent> allAgents;
 	private World physicsWorld;
 	private ArrayList<Obstacles> obstacList ;
 
 
 
-	public AgentWord() {
+	public AgentWorld() {
 		obstacList= new ArrayList<Obstacles>();
 		allAgents= new ArrayList<AbstractAgent>();
 		setPhysicsWorld(new World(new Vector2(), true));

@@ -1,7 +1,7 @@
 package game.systems;
 
 import agentDefinitions.AbstractAgent;
-import agentDefinitions.AgentWord;
+import agentDefinitions.AgentWorld;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -14,7 +14,7 @@ public class MovementSystem extends AbstractSystem {
 	}
 
 	@Override
-	public void proccessStep(AgentWord world) {
+	public void proccessStep(AgentWorld world) {
 		moveAgent(world.getAllAgents().get(0), new Vector2(5, 5));
 
 	}
