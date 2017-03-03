@@ -22,7 +22,7 @@ public class SystemsManager {
 
 	public void runSystemStep(float delta) {
 		for (int i = 0; i < systemList.size(); i++) {
-			systemList.get(i).proccessStep(world);
+			systemList.get(i).proccessStep(world, delta);
 			world.getPhysicsWorld().step(delta, 8, 3);
 		}
 	}

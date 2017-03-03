@@ -9,6 +9,6 @@ public class SaveReaderTest {
 	public static void main(String[] args) {
 		SaveFileReader reader = new SaveFileReader(new File("savedmaps/testSave.txt"));
 
-		System.out.println(reader.readFirstLine());
+		System.out.println(reader.readNextLine());
 	}
 }

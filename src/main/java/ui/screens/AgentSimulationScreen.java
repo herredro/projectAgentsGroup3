@@ -27,13 +27,13 @@ public class AgentSimulationScreen implements Screen {
 		this.camera = new OrthographicCamera(screenWidth, screenHeight);
 		this.systemsManager= new SystemsManager(world, camera);
 		creatBoxBoarder();
-		addAgents(AgentType.PERSUER, 2);
+		addAgents(AgentType.PERSUER, 100);
 	}
 
 	private void addAgents(AgentType type, int count) {
 		AgentFactory factory = new AgentFactory(world.getPhysicsWorld());
 		for (int i = 1; i <= count; i++) {
-			AbstractAgent agent = factory.createAgent(new Vector2(30 + i * 100, 30), type);
+			AbstractAgent agent = factory.createAgent(new Vector2(300, 150), type);
 			world.addAgent(agent);
 		}
 

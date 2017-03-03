@@ -54,7 +54,7 @@ public class RenderSystem extends AbstractSystem {
 	}
 
 	@Override
-	public void proccessStep(AgentWorld world) {
+	public void proccessStep(AgentWorld world, float delta) {
 		renderEverything();
 
 	}
