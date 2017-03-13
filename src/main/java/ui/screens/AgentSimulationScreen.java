@@ -4,7 +4,11 @@ import static game.AgentSimulatorConstants.screenHeight;
 import static game.AgentSimulatorConstants.screenWidth;
 import factorys.AgentFactory;
 import factorys.ObstacleFactory;
+import fileReader.SaveFileReader;
 import game.systems.SystemsManager;
+
+import java.io.File;
+
 import agentDefinitions.AbstractAgent;
 import agentDefinitions.AgentType;
 import agentDefinitions.AgentWorld;
@@ -21,12 +25,18 @@ public class AgentSimulationScreen implements Screen {
 	private AgentWorld world;
 	private OrthographicCamera camera;
 	private SystemsManager systemsManager;
+	private SaveFileReader saveLoader;
 
 	public AgentSimulationScreen() {
 		this.world = new AgentWorld();
 		this.camera = new OrthographicCamera(screenWidth, screenHeight);
 		this.systemsManager= new SystemsManager(world, camera);
-		creatBoxBoarder();
+		this.saveLoader = new SaveFileReader(new File("savedmaps/testSave.txt"), world);
+		// System.out.println(saveLoader.readNextLine());
+		// System.out.println(saveLoader.getTextFile() == null);
+		saveLoader.setScaleFactor(3);
+		saveLoader.loadObstacles();
+		// creatBoxBoarder();
 		addAgents(AgentType.PERSUER, 100);
 	}
 
