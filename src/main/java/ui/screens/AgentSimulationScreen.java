@@ -31,10 +31,14 @@ public class AgentSimulationScreen implements Screen {
 		this.world = new AgentWorld();
 		this.camera = new OrthographicCamera(screenWidth, screenHeight);
 		this.systemsManager= new SystemsManager(world, camera);
-		this.saveLoader = new SaveFileReader(new File("savedmaps/testSave.txt"), world);
+		try {
+			this.saveLoader = new SaveFileReader(new File("savedmaps/obstacleList2.txt"), world);
+		} catch (Error e) {
+			System.out.println(e);
+		}
 		// System.out.println(saveLoader.readNextLine());
 		// System.out.println(saveLoader.getTextFile() == null);
-		saveLoader.setScaleFactor(3);
+		saveLoader.setScaleFactor(200);
 		saveLoader.loadObstacles();
 		// creatBoxBoarder();
 		addAgents(AgentType.PERSUER, 100);
