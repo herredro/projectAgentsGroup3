@@ -4,6 +4,8 @@ import static game.AgentSimulatorConstants.screenHeight;
 import static game.AgentSimulatorConstants.screenWidth;
 import game.AgentSimulator;
 
+import java.io.File;
+
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
@@ -16,7 +18,7 @@ public class AgentSimulDesktop {
 
 		// Texture.setEnforcePotImages(false);
 
-		new LwjglApplication(new AgentSimulator(), config);
+		new LwjglApplication(new AgentSimulator(new File("savedmaps/obstacleList.txt")), config);
 	}
 
 }

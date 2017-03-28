@@ -27,12 +27,12 @@ public class AgentSimulationScreen implements Screen {
 	private SystemsManager systemsManager;
 	private SaveFileReader saveLoader;
 
-	public AgentSimulationScreen() {
+	public AgentSimulationScreen(File mapFile) {
 		this.world = new AgentWorld();
 		this.camera = new OrthographicCamera(screenWidth, screenHeight);
 		this.systemsManager= new SystemsManager(world, camera);
 		try {
-			this.saveLoader = new SaveFileReader(new File("savedmaps/obstacleList2.txt"), world);
+			this.saveLoader = new SaveFileReader(mapFile, world);
 		} catch (Error e) {
 			System.out.println(e);
 		}
