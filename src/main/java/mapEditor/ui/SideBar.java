@@ -3,6 +3,7 @@ package mapEditor.ui;
 import static game.AgentSimulatorConstants.screenHeight;
 import static game.AgentSimulatorConstants.screenWidth;
 import game.AgentSimulator;
+import game.AgentSimulatorConstants;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -272,9 +273,12 @@ public class SideBar extends JTabbedPane implements TableModelListener {
         button.addActionListener((ActionEvent e) -> {
 
 			LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-			config.width = screenWidth;
-			config.height = screenHeight;
+			//config.width = AgentSimulatorConstants.screenWidth;
+			//config.height =  AgentSimulatorConstants.screenHeight;
+			config.width = 1000;
+			config.height =  500;
 			config.forceExit = false;
+			config.resizable=false;
 
 			// Texture.setEnforcePotImages(false);
 			String fileName = fileReaderPanel.getMapName();

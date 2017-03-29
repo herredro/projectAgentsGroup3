@@ -32,6 +32,7 @@ public class SaveFileReader {
 	}
 
 	public void loadObstacles() {
+		System.out.println("loading obst.");
 		while (scanner.hasNextLine()) {
 			String obstacleDef = scanner.nextLine();
 			// System.out.println(obstacleDef + "scannerNext");
