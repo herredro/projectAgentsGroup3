@@ -1,7 +1,5 @@
 package mapEditor.ui;
 
-import static game.AgentSimulatorConstants.screenHeight;
-import static game.AgentSimulatorConstants.screenWidth;
 import game.AgentSimulator;
 import game.AgentSimulatorConstants;
 
@@ -273,10 +271,10 @@ public class SideBar extends JTabbedPane implements TableModelListener {
         button.addActionListener((ActionEvent e) -> {
 
 			LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-			//config.width = AgentSimulatorConstants.screenWidth;
-			//config.height =  AgentSimulatorConstants.screenHeight;
-			config.width = 1000;
-			config.height =  500;
+			config.width = AgentSimulatorConstants.screenWidth;
+			config.height = AgentSimulatorConstants.screenHeight;
+			// config.width = 1000;
+			// config.height = 500;
 			config.forceExit = false;
 			config.resizable=false;
 

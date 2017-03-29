@@ -42,6 +42,7 @@ public class AgentSimulationScreen implements Screen {
 		saveLoader.loadObstacles();
 		// creatBoxBoarder();
 		addAgents(AgentType.PERSUER, 100);
+		addAgents(AgentType.EVADER, 100);
 	}
 
 	private void addAgents(AgentType type, int count) {

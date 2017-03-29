@@ -41,7 +41,7 @@ public class RenderSystem extends AbstractSystem {
 
 		for (Obstacles obs : world.getObstacList()) {
 			renderer.begin(ShapeType.Line);
-			renderer.setColor(Color.CYAN);
+			renderer.setColor(Color.WHITE);
 			renderer.polygon(obs.getVertices());
 
 			renderer.end();
