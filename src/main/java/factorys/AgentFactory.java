@@ -4,6 +4,7 @@ import game.AgentSimulatorConstants;
 import ui.rendering.RenderComponent;
 import agentDefinitions.AbstractAgent;
 import agentDefinitions.AgentType;
+import agentDefinitions.EvaderAgent;
 import agentDefinitions.PersuerAgent;
 
 import com.badlogic.gdx.math.Vector2;
@@ -55,6 +56,9 @@ public class AgentFactory {
 		};
 		if (type == AgentType.PERSUER) {
 			agent = new PersuerAgent(agentBody, renderComp);
+		}
+		if (type == AgentType.EVADER) {
+			agent = new EvaderAgent(agentBody, renderComp);
 		}
 
 		return agent;

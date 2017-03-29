@@ -280,6 +280,7 @@ public class SideBar extends JTabbedPane implements TableModelListener {
 			config.forceExit = false;
 			config.resizable=false;
 
+
 			// Texture.setEnforcePotImages(false);
 			String fileName = fileReaderPanel.getMapName();
 			File mapFile = new File("savedmaps/" + fileName + ".txt");

@@ -2,8 +2,11 @@ package game.systems;
 
 import agentDefinitions.AbstractAgent;
 import agentDefinitions.AgentWorld;
+import agentDefinitions.EvaderAgent;
 import agentDefinitions.Obstacles;
+import agentDefinitions.PersuerAgent;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -14,7 +17,7 @@ public class RenderSystem extends AbstractSystem {
 	private OrthographicCamera camera;
 	private AgentWorld world;
 
-	ShapeRenderer renderer = new ShapeRenderer();
+	private ShapeRenderer renderer = new ShapeRenderer();
 
 	public RenderSystem(OrthographicCamera camera, AgentWorld world) {
 		super();
@@ -38,16 +41,21 @@ public class RenderSystem extends AbstractSystem {
 
 		for (Obstacles obs : world.getObstacList()) {
 			renderer.begin(ShapeType.Line);
-
+			renderer.setColor(Color.CYAN);
 			renderer.polygon(obs.getVertices());
 
 			renderer.end();
 		}
 		for (AbstractAgent agent : world.getAllAgents()) {
 			renderer.begin(ShapeType.Line);
-
-			renderer.circle(agent.getPhysicsBody().getPosition().x, agent.getPhysicsBody().getPosition().y, 5);
-
+			if (agent.getClass() == PersuerAgent.class) {
+				renderer.setColor(Color.GREEN);
+				renderer.circle(agent.getPhysicsBody().getPosition().x, agent.getPhysicsBody().getPosition().y, 5);
+			}
+			if (agent.getClass() == EvaderAgent.class) {
+				renderer.setColor(Color.RED);
+				renderer.circle(agent.getPhysicsBody().getPosition().x, agent.getPhysicsBody().getPosition().y, 5);
+			}
 			renderer.end();
 		}
 		end();
