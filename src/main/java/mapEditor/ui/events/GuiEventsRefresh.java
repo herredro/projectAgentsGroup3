@@ -28,6 +28,7 @@ public class GuiEventsRefresh extends GuiEvents {
 new FileOutputStream("savedmaps/" + text
 				+ ".txt"), "utf-8"))) {
             writer.write(PolyLine.nameObstacle);
+			writer.close();
         }
         catch (IOException e)
         {

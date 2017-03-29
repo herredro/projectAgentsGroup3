@@ -21,7 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -45,7 +44,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
  * @version 1.00
  */
 public class SideBar extends JTabbedPane implements TableModelListener {
-	private JTextField mapField;
+	private FileReaderPanel fileReaderPanel;
     /**
      * Holds the name of the curve
      */
@@ -235,8 +234,9 @@ public class SideBar extends JTabbedPane implements TableModelListener {
         controls = new JPanel(new GridLayout(0, 2));
         container.add(controls);
         this.addTab("Controls", container);
-		mapField = new JTextField();
-		this.controls.add(mapField);
+		this.fileReaderPanel = new FileReaderPanel();
+		controls.add(fileReaderPanel);
+		controls.add(new JPanel());
 //        JLabel tmp = new JLabel("Set other lines to invisible");
 //        tmp.setHorizontalAlignment(SwingConstants.CENTER);
 //        controls.add(tmp);
@@ -262,7 +262,7 @@ public class SideBar extends JTabbedPane implements TableModelListener {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-				GuiEventsRefresh event = new GuiEventsRefresh(this, mapField.getText());
+				GuiEventsRefresh event = new GuiEventsRefresh(this, fileReaderPanel.getMapName());
 				fireEvent(event);
             }
         });
@@ -277,10 +277,9 @@ public class SideBar extends JTabbedPane implements TableModelListener {
 			config.forceExit = false;
 
 			// Texture.setEnforcePotImages(false);
-			String fileName = mapField.getText();
+			String fileName = fileReaderPanel.getMapName();
 			File mapFile = new File("savedmaps/" + fileName + ".txt");
-
-			new LwjglApplication(new AgentSimulator(mapFile), config);
+			new LwjglApplication(new AgentSimulator(mapFile, Integer.parseInt(fileReaderPanel.getMapScale())), config);
 
         });
         controls.add(button);
