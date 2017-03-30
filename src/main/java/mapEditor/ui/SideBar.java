@@ -271,12 +271,14 @@ public class SideBar extends JTabbedPane implements TableModelListener {
         button.addActionListener((ActionEvent e) -> {
 
 			LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+			config.forceExit = false;
 			config.width = AgentSimulatorConstants.screenWidth;
 			config.height = AgentSimulatorConstants.screenHeight;
-			// config.width = 1000;
+			System.out.println(config.width);
+
 			// config.height = 500;
-			config.forceExit = false;
-			config.resizable=false;
+
+			// config.resizable=false;
 
 
 			// Texture.setEnforcePotImages(false);
