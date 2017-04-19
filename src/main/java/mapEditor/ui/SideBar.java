@@ -32,7 +32,9 @@ import mapEditor.ui.events.GuiEventsCurrent;
 import mapEditor.ui.events.GuiEventsLengthChange;
 import mapEditor.ui.events.GuiEventsMove;
 import mapEditor.ui.events.GuiEventsRefresh;
+import ui.screens.AgentSimulationScreen;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
@@ -44,6 +46,8 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
  */
 public class SideBar extends JTabbedPane implements TableModelListener {
 	private FileReaderPanel fileReaderPanel;
+	private LwjglApplication app;
+	private AgentSimulator gameSimul;
     /**
      * Holds the name of the curve
      */
@@ -275,16 +279,26 @@ public class SideBar extends JTabbedPane implements TableModelListener {
 			config.width = AgentSimulatorConstants.screenWidth;
 			config.height = AgentSimulatorConstants.screenHeight;
 			System.out.println(config.width);
+			String fileName = fileReaderPanel.getMapName();
+			File mapFile = new File("savedmaps/" + fileName + ".txt");
 
 			// config.height = 500;
 
 			// config.resizable=false;
-
+			gameSimul = new AgentSimulator(mapFile, Integer.parseInt(fileReaderPanel.getMapScale()));
 
 			// Texture.setEnforcePotImages(false);
-			String fileName = fileReaderPanel.getMapName();
-			File mapFile = new File("savedmaps/" + fileName + ".txt");
-			new LwjglApplication(new AgentSimulator(mapFile, Integer.parseInt(fileReaderPanel.getMapScale())), config);
+
+			if (app == null) {
+				app = new LwjglApplication(gameSimul, config);
+			} else {
+				Screen screen = gameSimul.getScreen();
+				// screen.dispose();
+				AgentSimulationScreen screen2 = new AgentSimulationScreen(mapFile, Integer.parseInt(fileReaderPanel
+						.getMapScale()));
+				gameSimul.setScreen(screen2);
+				screen2.show();
+			}
 
         });
         controls.add(button);

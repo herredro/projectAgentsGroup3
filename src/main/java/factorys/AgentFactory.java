@@ -1,6 +1,9 @@
 package factorys;
 
 import game.AgentSimulatorConstants;
+
+import java.util.HashMap;
+
 import ui.rendering.RenderComponent;
 import agentDefinitions.AbstractAgent;
 import agentDefinitions.AgentType;
@@ -18,10 +21,13 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class AgentFactory {
 	private World physicsWorld;
+	private static int agentIdNumber = 0;
+	private HashMap<Integer, AbstractAgent> idMap;
 
-	public AgentFactory(World physicsWorld) {
+	public AgentFactory(World physicsWorld, HashMap<Integer, AbstractAgent> idMap) {
 		super();
 		this.physicsWorld = physicsWorld;
+		this.idMap = idMap;
 	}
 
 	public AbstractAgent createAgent(Vector2 position, AgentType type) {
@@ -46,6 +52,7 @@ public class AgentFactory {
 
 		// Create our fixture and attach it to the body
 		Fixture fixture = agentBody.createFixture(fixtureDef);
+		fixture.setUserData(new Integer(agentIdNumber));
 
 		// Remember to dispose of any shapes after you're done with them!
 		// BodyDef and FixtureDef don't need disposing, but shapes do.
@@ -60,7 +67,14 @@ public class AgentFactory {
 		if (type == AgentType.EVADER) {
 			agent = new EvaderAgent(agentBody, renderComp);
 		}
+		if (fixture.getUserData() == null) {
+			System.out.println("LARGE problems");
+		}
 
+		Integer id = (Integer) fixture.getUserData();
+
+		idMap.put(id, agent);
+		agentIdNumber++;
 		return agent;
 
 	}

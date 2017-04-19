@@ -11,6 +11,15 @@ public abstract class AbstractAgent {
 	protected Body physicsBody;
 
 	protected RenderComponent renderData;
+	protected Vector2 targetPosition;
+
+	public Vector2 getTargetPosition() {
+		return targetPosition;
+	}
+
+	public void setTargetPosition(Vector2 targetPosition) {
+		this.targetPosition = targetPosition;
+	}
 
 	protected Vector2 direction;
 

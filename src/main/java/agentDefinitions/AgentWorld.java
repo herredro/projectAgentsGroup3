@@ -1,13 +1,18 @@
 package agentDefinitions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class AgentWorld {
 	private ArrayList<AbstractAgent> allAgents;
+
 	private World physicsWorld;
+
+	private HashMap<Integer, AbstractAgent> idMap;
+
 	private ArrayList<Obstacles> obstacList ;
 
 
@@ -15,6 +20,7 @@ public class AgentWorld {
 	public AgentWorld() {
 		obstacList= new ArrayList<Obstacles>();
 		allAgents= new ArrayList<AbstractAgent>();
+		idMap = new HashMap<Integer, AbstractAgent>();
 		setPhysicsWorld(new World(new Vector2(), true));
 		
 
@@ -52,6 +58,10 @@ public class AgentWorld {
 	// debug method
 	public void setPhysicsWorld(World physicsWorld) {
 		this.physicsWorld = physicsWorld;
+	}
+
+	public HashMap<Integer, AbstractAgent> getIdMap() {
+		return idMap;
 	}
 
 }

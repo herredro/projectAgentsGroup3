@@ -15,9 +15,12 @@ public class SystemsManager {
 	public SystemsManager(AgentWorld world, OrthographicCamera camera) {
 		this.world = world;
 		this.systemList= new ArrayList<AbstractSystem>();
+		systemList.add(new RandomAi());
+		systemList.add(new BasicAiSystem());
 		systemList.add(new MovementSystem());
 		systemList.add(new RenderSystem(camera, world));
 		
+
 	}
 
 	public void runSystemStep(float delta) {

@@ -3,7 +3,6 @@ package ui.screens;
 import static game.AgentSimulatorConstants.screenHeight;
 import static game.AgentSimulatorConstants.screenWidth;
 import factorys.AgentFactory;
-import factorys.ObstacleFactory;
 import fileReader.SaveFileReader;
 import game.systems.SystemsManager;
 
@@ -12,7 +11,6 @@ import java.io.File;
 import agentDefinitions.AbstractAgent;
 import agentDefinitions.AgentType;
 import agentDefinitions.AgentWorld;
-import agentDefinitions.Obstacles;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -41,14 +39,14 @@ public class AgentSimulationScreen implements Screen {
 		saveLoader.setScaleFactor(scale);
 		saveLoader.loadObstacles();
 		// creatBoxBoarder();
-		addAgents(AgentType.PERSUER, 100);
-		addAgents(AgentType.EVADER, 100);
+		addAgents(AgentType.PERSUER, 2);
+		addAgents(AgentType.EVADER, 2);
 	}
 
 	private void addAgents(AgentType type, int count) {
-		AgentFactory factory = new AgentFactory(world.getPhysicsWorld());
+		AgentFactory factory = new AgentFactory(world.getPhysicsWorld(), world.getIdMap());
 		for (int i = 1; i <= count; i++) {
-			AbstractAgent agent = factory.createAgent(new Vector2(300, 150), type);
+			AbstractAgent agent = factory.createAgent(new Vector2(300 + i * 30, 150), type);
 			world.addAgent(agent);
 		}
 
@@ -58,23 +56,6 @@ public class AgentSimulationScreen implements Screen {
 
 	public void show() {
 
-	}
-
-	private void creatBoxBoarder() {
-		ObstacleFactory obstacleFactory = new ObstacleFactory(world.getPhysicsWorld());
-		Obstacles rightBoarder = obstacleFactory.createObstacle(new Vector2[] { new Vector2(), new Vector2(10, 0),
-				new Vector2(10, 300), new Vector2(0, 300) }, new Vector2(0, 0));
-		world.addObstacle(rightBoarder);
-		Obstacles leftBoarder = obstacleFactory.createObstacle(new Vector2[] { new Vector2(), new Vector2(10, 0),
-				new Vector2(10, 300), new Vector2(0, 300) }, new Vector2(600, 0));
-		world.addObstacle(leftBoarder);
-		Obstacles bottomBoarder = obstacleFactory.createObstacle(new Vector2[] { new Vector2(), new Vector2(600, 0),
-				new Vector2(600, 10), new Vector2(0, 10) }, new Vector2(0, 0));
-		world.addObstacle(bottomBoarder);
-		Obstacles topBoarder = obstacleFactory.createObstacle(new Vector2[] { new Vector2(), new Vector2(600, 0),
-				new Vector2(600, 10), new Vector2(0, 10) }, new Vector2(0, 300));
-		world.addObstacle(topBoarder);
-		
 	}
 
 	public void render(float delta) {
