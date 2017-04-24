@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import ui.rendering.RenderComponent;
 import agentDefinitions.AbstractAgent;
+import agentDefinitions.AgentState;
 import agentDefinitions.AgentType;
 import agentDefinitions.EvaderAgent;
 import agentDefinitions.PersuerAgent;
@@ -63,6 +64,7 @@ public class AgentFactory {
 		};
 		if (type == AgentType.PERSUER) {
 			agent = new PersuerAgent(agentBody, renderComp);
+			agent.setAgentState(AgentState.PERSUER_SEARCH);
 		}
 		if (type == AgentType.EVADER) {
 			agent = new EvaderAgent(agentBody, renderComp);

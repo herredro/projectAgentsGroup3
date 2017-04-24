@@ -1,5 +1,6 @@
 package game.systems;
 
+import game.systems.abstractDef.AbstractSystem;
 import agentDefinitions.AbstractAgent;
 import agentDefinitions.AgentWorld;
 import agentDefinitions.EvaderAgent;

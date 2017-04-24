@@ -47,15 +47,7 @@ public AABBFindAllCallback(AgentWorld world, Vector2 origin, float radius) {
 		if (position.dst(origin) < radius) {
 			detectedAgents.add(agent);
 		}
-		// Object userData = fixture.getBody().getUserData();
-//	if (userData != null && userData.getClass() == Integer.class) {
-//		Integer reference = (Integer) userData;
-//		Entity entity = world.getEntity(reference);
-//		Vector2 position = physicsMap.get(entity).getPosition();
-//		if (position.dst(origin) < radius && predicate.check(entity)) {
-//			entities.add(entity);
-//		}
-//	}
+
 	return true;
 }
 

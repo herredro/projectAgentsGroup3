@@ -7,8 +7,26 @@ import com.badlogic.gdx.physics.box2d.Body;
 
 public abstract class AbstractAgent {
 
+	protected boolean isDead;
+
+	public boolean isDead() {
+		return isDead;
+	}
+
+	public void setDead(boolean isDead) {
+		this.isDead = isDead;
+	}
 
 	protected Body physicsBody;
+	protected AgentState agentState;
+
+	public AgentState getAgentState() {
+		return agentState;
+	}
+
+	public void setAgentState(AgentState agentState) {
+		this.agentState = agentState;
+	}
 
 	protected RenderComponent renderData;
 	protected Vector2 targetPosition;

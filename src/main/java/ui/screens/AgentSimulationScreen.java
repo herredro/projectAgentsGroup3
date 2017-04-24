@@ -39,14 +39,15 @@ public class AgentSimulationScreen implements Screen {
 		saveLoader.setScaleFactor(scale);
 		saveLoader.loadObstacles();
 		// creatBoxBoarder();
-		addAgents(AgentType.PERSUER, 2);
-		addAgents(AgentType.EVADER, 2);
+		addAgents(AgentType.PERSUER, 300, 0, 0);
+		addAgents(AgentType.EVADER, 400, 100, 100);
+
 	}
 
-	private void addAgents(AgentType type, int count) {
+	private void addAgents(AgentType type, int count, int x, int y) {
 		AgentFactory factory = new AgentFactory(world.getPhysicsWorld(), world.getIdMap());
 		for (int i = 1; i <= count; i++) {
-			AbstractAgent agent = factory.createAgent(new Vector2(300 + i * 30, 150), type);
+			AbstractAgent agent = factory.createAgent(new Vector2(x, y), type);
 			world.addAgent(agent);
 		}
 

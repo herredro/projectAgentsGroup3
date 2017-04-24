@@ -1,5 +1,7 @@
 package game.systems;
 
+import game.systems.abstractDef.AbstractSystem;
+
 import java.util.ArrayList;
 
 import agentDefinitions.AgentWorld;
@@ -15,10 +17,10 @@ public class SystemsManager {
 	public SystemsManager(AgentWorld world, OrthographicCamera camera) {
 		this.world = world;
 		this.systemList= new ArrayList<AbstractSystem>();
-		systemList.add(new RandomAi());
-		systemList.add(new BasicAiSystem());
+		systemList.add(new AiManager());
 		systemList.add(new MovementSystem());
 		systemList.add(new RenderSystem(camera, world));
+		systemList.add(new RemoveDeadAgents());
 		
 
 	}
