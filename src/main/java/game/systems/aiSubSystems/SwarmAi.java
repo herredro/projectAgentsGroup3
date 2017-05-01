@@ -1,5 +1,7 @@
 package game.systems.aiSubSystems;
 
+import game.AgentSimulatorConstants;
+
 import java.util.ArrayList;
 
 import agentDefinitions.AbstractAgent;
@@ -12,7 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class SwarmAi {
 	
-	private int deathDistance = 30;
+	private int deathDistance;
 
 	private DetectionSystem detectionSystem;
 	private long startOfSim;
@@ -23,6 +25,7 @@ public class SwarmAi {
 		super();
 		this.detectionSystem = new DetectionSystem();
 		startOfSim = System.currentTimeMillis();
+		deathDistance = AgentSimulatorConstants.deathRadius;
 
 	}
 	

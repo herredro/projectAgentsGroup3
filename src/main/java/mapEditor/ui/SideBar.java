@@ -276,8 +276,8 @@ public class SideBar extends JTabbedPane implements TableModelListener {
 
 			LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 			config.forceExit = false;
-			config.width = AgentSimulatorConstants.screenWidth;
-			config.height = AgentSimulatorConstants.screenHeight;
+			config.width = AgentSimulatorConstants.agentScreenWidth;
+			config.height = AgentSimulatorConstants.agentScreenHeight;
 			System.out.println(config.width);
 			String fileName = fileReaderPanel.getMapName();
 			File mapFile = new File("savedmaps/" + fileName + ".txt");

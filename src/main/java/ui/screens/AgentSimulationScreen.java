@@ -1,7 +1,7 @@
 package ui.screens;
 
-import static game.AgentSimulatorConstants.screenHeight;
-import static game.AgentSimulatorConstants.screenWidth;
+import static game.AgentSimulatorConstants.agentScreenHeight;
+import static game.AgentSimulatorConstants.agentScreenWidth;
 import factorys.AgentFactory;
 import fileReader.SaveFileReader;
 import game.systems.SystemsManager;
@@ -27,7 +27,7 @@ public class AgentSimulationScreen implements Screen {
 
 	public AgentSimulationScreen(File mapFile, int scale) {
 		this.world = new AgentWorld();
-		this.camera = new OrthographicCamera(screenWidth, screenHeight);
+		this.camera = new OrthographicCamera(agentScreenWidth, agentScreenHeight);
 		this.systemsManager= new SystemsManager(world, camera);
 		try {
 			this.saveLoader = new SaveFileReader(mapFile, world);
