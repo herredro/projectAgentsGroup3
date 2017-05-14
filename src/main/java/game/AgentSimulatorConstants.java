@@ -14,7 +14,7 @@ public class AgentSimulatorConstants {
 	// radius of agent sight
 	public static final float detectionRadius = 100;
 	// if <= this range evaders get removed
-	public static final int deathRadius = 5;
+	public static final int deathRadius = 25;
 
 	// time in milliseconds
 	public static final int aiDecisionsUpdate = 500;

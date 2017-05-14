@@ -13,9 +13,6 @@ import com.badlogic.gdx.math.Vector2;
 public class DetectionSystem {
 
 
-
-
-
 	public ArrayList<ArrayList<AbstractAgent>> detectAllAgents(AgentWorld world) {
 		ArrayList<ArrayList<AbstractAgent>> returnList = new ArrayList<ArrayList<AbstractAgent>>();
 		for (int i = 0; i < world.getAllAgents().size(); i++) {

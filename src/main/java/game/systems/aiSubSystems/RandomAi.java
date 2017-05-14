@@ -24,7 +24,7 @@ public class RandomAi extends AbstractSystem {
 			Vector2 position = agent.getPossition();
 				Vector2 targetdifference = new Vector2((float) (100 - Math.random() * 200),
 						(float) (100 - Math.random() * 200));
-				agent.setTargetPosition(position.cpy().sub(targetdifference));
+				agent.setDirection(position.cpy().sub(targetdifference));
 
 		}
 			startOfSim = System.currentTimeMillis();

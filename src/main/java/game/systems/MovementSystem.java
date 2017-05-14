@@ -28,8 +28,8 @@ public class MovementSystem extends AbstractSystem {
 	}
 
 	public void moveAgent(AbstractAgent agent) {
-		if (agent.getTargetPosition() != null) {
-		Vector2 velocity = agent.getTargetPosition().cpy().sub(agent.getPossition().cpy()).nor();
+		if (agent.getDirection() != null) {
+			Vector2 velocity = agent.getDirection().cpy().nor();
 
 	
 		agent.getPhysicsBody().setLinearVelocity(velocity.scl(maxVelosity));
