@@ -2,7 +2,7 @@ package game.systems.aiSubSystems;
 
 
 import game.AgentSimulatorConstants;
-import game.systems.systemUtil.AABBFindAllCallback;
+import game.systems.systemUtil.AABBFindAllAgentsCallback;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ public class DetectionSystem {
 		for (int i = 0; i < world.getAllAgents().size(); i++) {
 			AbstractAgent agent = world.getAllAgents().get(i);
 			float radius = AgentSimulatorConstants.detectionRadius;
-			AABBFindAllCallback detection = new AABBFindAllCallback(world, agent.getPossition(), radius);
+			AABBFindAllAgentsCallback detection = new AABBFindAllAgentsCallback(world, agent.getPossition(), radius);
 
 			Vector2 position = agent.getPossition();
 			world.getPhysicsWorld().QueryAABB(detection, position.x - radius, position.y - radius, position.x + radius,

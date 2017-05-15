@@ -1,5 +1,6 @@
 package game.systems;
 
+import game.AgentSimulatorConstants;
 import game.systems.abstractDef.AbstractSystem;
 import agentDefinitions.AbstractAgent;
 import agentDefinitions.AgentWorld;
@@ -8,12 +9,13 @@ import com.badlogic.gdx.math.Vector2;
 
 public class MovementSystem extends AbstractSystem {
 
-	private final int maxVelosity = 10;
+	private int maxVelosity = 0;
 	private long startOfSim;
 	private final long movementUpdateRateMillsec = 100;
 
 	public MovementSystem() {
 		startOfSim = System.currentTimeMillis();
+		this.maxVelosity = AgentSimulatorConstants.maxVelosity;
 	}
 
 	@Override

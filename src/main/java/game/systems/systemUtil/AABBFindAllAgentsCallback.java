@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.QueryCallback;
 
-public class AABBFindAllCallback implements QueryCallback {
+public class AABBFindAllAgentsCallback implements QueryCallback {
 
 /** The game world, used for entity retrieval in order to pass them to the predicate */
 private AgentWorld world;
@@ -27,7 +27,7 @@ private ArrayList<AbstractAgent> detectedAgents;
 
 
 
-public AABBFindAllCallback(AgentWorld world, Vector2 origin, float radius) {
+public AABBFindAllAgentsCallback(AgentWorld world, Vector2 origin, float radius) {
 	this.world = world;
 	this.origin = origin;
 	this.radius = radius;

@@ -18,4 +18,6 @@ public class AgentSimulatorConstants {
 
 	// time in milliseconds
 	public static final int aiDecisionsUpdate = 500;
+	// Agent Velocity
+	public static final int maxVelosity = 15;
 }
