@@ -18,7 +18,11 @@ public class SwarmAi {
 
 	private DetectionSystem detectionSystem;
 	private long startOfSim;
-	private final long targetUpdateRate = 500;
+	private final long targetUpdateRate = AgentSimulatorConstants.aiDecisionsUpdate;
+
+	// private final int seperationMagn = 1;
+	// private final int followMagn = 1;
+	// private final int randomMagn = 1;
 
 
 	public SwarmAi() {
@@ -40,58 +44,110 @@ public class SwarmAi {
 				AbstractAgent agent = world.getAllAgents().get(i);
 				Vector2 position = agent.getPossition().cpy();
 				ArrayList<AbstractAgent> detectedAgents = detectionList.get(i);
-				AbstractAgent targetAgent = null;
+
 
 				if (agent.getClass() == PersuerAgent.class) {
-					targetAgent = findClosestEvader(position, detectedAgents, targetAgent);
+					// System.out.println("start");
+
+					Vector2 followDetectedComponent = calculateFollowComponent(position, detectedAgents);
+					Vector2 seperationComponent = calculateSeperationComponent(position, detectedAgents);
+					// System.out.println(seperationComponent);
+					EvaderAgent targetAgent = (EvaderAgent) findClosestEvader(position, detectedAgents);
 
 					if (targetAgent != null) {
-						// System.out.println(agent.getAgentState());
+							// System.out.println(agent.getAgentState());
 
-						agent.setDirection(targetAgent.getPossition().cpy().sub(position.cpy()));
+						agent.setDirection(weightedSumComponents(followDetectedComponent, seperationComponent, 1));
 						agent.setAgentState(AgentState.PERSUER_PERSUIT);
 
-						// Remove DeadAgents
-						if (position.cpy().sub(targetAgent.getPossition().cpy()).len() <= deathDistance) {
-							targetAgent.setDead(true);
-							agent.setAgentState(AgentState.PERSUER_SEARCH);
-						}
+							// Remove DeadAgents
+							if (position.cpy().sub(targetAgent.getPossition().cpy()).len() <= deathDistance) {
+								targetAgent.setDead(true);
+							// agent.setAgentState(AgentState.PERSUER_SEARCH);
+							}
 
 					} else if (targetAgent == null) {
-						Vector2 targetdifference = new Vector2((float) (100 - Math.random() * 200),
-								(float) (100 - Math.random() * 200));
-						agent.setDirection(targetdifference);
+
 						agent.setAgentState(AgentState.PERSUER_SEARCH);
 
-					}
+						Vector2 destination = weightedSumComponents(followDetectedComponent, seperationComponent, 1);
 
-				}
-				if (agent.getClass() == EvaderAgent.class) {
-					Vector2 targetdifference = new Vector2((float) (100 - Math.random() * 200),
-							(float) (100 - Math.random() * 200));
-					agent.setDirection(targetdifference);
+						agent.setDirection(destination);
 				}
 
 			}
 			startOfSim = System.currentTimeMillis();
+			}
 		}
 
 	}
 
 
-	private AbstractAgent findClosestEvader(Vector2 position, ArrayList<AbstractAgent> detectedAgents,
-			AbstractAgent targetAgentPlaceHolder) {
-		Vector2 closestDistance = new Vector2();
+	private Vector2 weightedSumComponents(Vector2 followDetected, Vector2 seperation, double randomScale) {
 
+
+		Vector2 sum = new Vector2();
+			sum = followDetected.cpy().nor().scl(1)
+				.add(seperation.cpy().scl((float) 1).add(calculateRandomComponent().nor().scl((float) randomScale)));
+		return sum;
+
+	}
+
+	private Vector2 calculateRandomComponent() {
+
+		return new Vector2((float) (10 - Math.random() * 20), (float) (10 - Math.random() * 20));
+	}
+
+	private Vector2 calculateSeperationComponent(Vector2 position, ArrayList<AbstractAgent> detectedAgents) {
+		
+		Vector2 seperation= new Vector2();
+		// int counter = 0;
+		
+		for (int j = 0; j < detectedAgents.size(); j++) {
+			if (detectedAgents.get(j).getClass() == PersuerAgent.class){
+				Vector2 distance = position.cpy().sub(detectedAgents.get(j).getPossition().cpy().scl(-1));
+				// System.out.println(distance.len() + "distance first time");
+				if (distance.len() < 10) {
+					// System.out.println(distance.len());
+					if (distance.len() == 0) {
+						seperation.add(new Vector2((float) ((int) 100 * (1 - 2 * Math.random())),
+								(float) ((int) 100 * (1 - 2 * Math.random()))));
+						// counter++;
+					} else {
+					seperation.add(distance.cpy());
+						// System.out.println(seperation.len());
+						// counter++;
+					}
+				}
+				
+			}
+		}
+
+		return seperation;
+	}
+
+	private Vector2 calculateFollowComponent(Vector2 position, ArrayList<AbstractAgent> detectedAgents) {
+		if (findClosestEvader(position, detectedAgents) != null) {
+		Vector2 closestEvaderPos = findClosestEvader(position, detectedAgents).getPossition();
+		return closestEvaderPos.cpy().sub(position);
+		}
+		return new Vector2();
+	}
+
+	private AbstractAgent findClosestEvader(Vector2 position, ArrayList<AbstractAgent> detectedAgents) {
+		Vector2 closestDistance = new Vector2();
+		EvaderAgent returnAgent = null;
 		boolean evaderDetected = false;
+
 
 		for (int j = 0; j < detectedAgents.size(); j++) {
 
 			if (detectedAgents.get(j).getClass() == EvaderAgent.class) {
 				if (evaderDetected == false) {
+					//System.out.println("detection");
 					Vector2 distance = position.cpy().sub(detectedAgents.get(j).getPossition().cpy());
 					closestDistance = distance.cpy();
-					targetAgentPlaceHolder = detectedAgents.get(j);
+					returnAgent = (EvaderAgent) detectedAgents.get(j);
 					evaderDetected = true;
 
 				} else {
@@ -99,8 +155,9 @@ public class SwarmAi {
 				Vector2 distance = position.cpy().sub(detectedAgents.get(j).getPossition().cpy());
 
 					if (distance.len() < closestDistance.len()) {
+						returnAgent = (EvaderAgent) detectedAgents.get(j);
 						closestDistance = distance;
-						targetAgentPlaceHolder = detectedAgents.get(j);
+
 
 					}
 
@@ -109,10 +166,8 @@ public class SwarmAi {
 			}
 
 		}
-		// if (targetAgentPlaceHolder != null) {
-		// System.out.println(targetAgentPlaceHolder.getClass());
-		// }
-		return targetAgentPlaceHolder;
+
+		return returnAgent;
 	}
 
 	private boolean isTimeForUpdate() {

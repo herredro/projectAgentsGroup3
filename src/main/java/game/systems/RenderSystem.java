@@ -2,6 +2,7 @@ package game.systems;
 
 import game.systems.abstractDef.AbstractSystem;
 import agentDefinitions.AbstractAgent;
+import agentDefinitions.AgentState;
 import agentDefinitions.AgentWorld;
 import agentDefinitions.EvaderAgent;
 import agentDefinitions.Obstacles;
@@ -50,8 +51,14 @@ public class RenderSystem extends AbstractSystem {
 		for (AbstractAgent agent : world.getAllAgents()) {
 			renderer.begin(ShapeType.Line);
 			if (agent.getClass() == PersuerAgent.class) {
-				renderer.setColor(Color.GREEN);
+				if (agent.getAgentState() == AgentState.PERSUER_PERSUIT) {
+					renderer.setColor(Color.YELLOW);
+					renderer.circle(agent.getPhysicsBody().getPosition().x, agent.getPhysicsBody().getPosition().y, 5);
+
+				} else {
+					renderer.setColor(Color.GREEN);
 				renderer.circle(agent.getPhysicsBody().getPosition().x, agent.getPhysicsBody().getPosition().y, 5);
+				}
 			}
 			if (agent.getClass() == EvaderAgent.class) {
 				renderer.setColor(Color.RED);

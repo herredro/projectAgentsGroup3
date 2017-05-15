@@ -46,7 +46,7 @@ public class MainEvaderAi {
 
 					Vector2 destination = weightedSumComponents(avoidanceComponent, seperationComponent);
 
-					agent.setDirection(destination);
+					agent.setDirection(destination.scl(1));
 				}
 
 			}
