@@ -59,7 +59,7 @@ public class MainEvaderAi {
 	private Vector2 weightedSumComponents(Vector2 avoidance, Vector2 seperation) {
 
 		Vector2 sum = new Vector2();
-		sum = avoidance.cpy().nor().scl(10).add(seperation.cpy().nor().scl(10));
+		sum = avoidance.cpy().nor().scl(10).add(seperation.cpy().nor().scl(100));
 		
 		return sum;
 	}
@@ -67,7 +67,7 @@ public class MainEvaderAi {
 	
 	private Vector2 calculateSeperationComponent(Vector2 position, ArrayList<AbstractAgent> detectedAgents) {
 
-		return new Vector2((float) (10 - Math.random() * 20), (float) (10 - Math.random() * 20));
+		return new Vector2((float) (1 - Math.random() * 2), (float) (1 - Math.random() * 2));
 	}
 
 	private Vector2 calculateAvoidanceComponent(Vector2 position, ArrayList<AbstractAgent> detectedAgents) {

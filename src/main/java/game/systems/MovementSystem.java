@@ -10,12 +10,15 @@ import com.badlogic.gdx.math.Vector2;
 public class MovementSystem extends AbstractSystem {
 
 	private int maxVelosity = 0;
+	private int maxVelocityEvaders = 0;
+
 	private long startOfSim;
 	private final long movementUpdateRateMillsec = 100;
 
 	public MovementSystem() {
 		startOfSim = System.currentTimeMillis();
 		this.maxVelosity = AgentSimulatorConstants.maxVelosity;
+		this.maxVelocityEvaders = AgentSimulatorConstants.maxVelosityEvaders;
 	}
 
 	@Override

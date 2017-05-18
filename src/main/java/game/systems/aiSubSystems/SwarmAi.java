@@ -44,7 +44,7 @@ public class SwarmAi {
 				AbstractAgent agent = world.getAllAgents().get(i);
 				Vector2 position = agent.getPossition().cpy();
 				ArrayList<AbstractAgent> detectedAgents = detectionList.get(i);
-
+				detectedAgents.remove(agent);
 
 				if (agent.getClass() == PersuerAgent.class) {
 					// System.out.println("start");
@@ -58,7 +58,7 @@ public class SwarmAi {
 							// System.out.println(agent.getAgentState());
 
 						agent.setDirection(weightedSumComponentsPersuit(followDetectedComponent, seperationComponent,
- 0));
+								0.5));
 						agent.setAgentState(AgentState.PERSUER_PERSUIT);
 
 							// Remove DeadAgents
@@ -89,7 +89,7 @@ public class SwarmAi {
 
 		Vector2 sum = new Vector2();
 		sum = followDetected.cpy().nor().scl(1)
-				.add(seperation.cpy().scl((float) 1).add(calculateRandomComponent().nor().scl((float) randomScale)));
+				.add(seperation.cpy().scl((float) 10).add(calculateRandomComponent().nor().scl((float) randomScale)));
 		return sum;
 
 	}
@@ -118,7 +118,7 @@ public class SwarmAi {
 			if (detectedAgents.get(j).getClass() == PersuerAgent.class && j != 0) {
 				Vector2 distance = position.cpy().sub(detectedAgents.get(j).getPossition().cpy());
 
-				if (distance.len() < 10) {
+				if (distance.len() < 20) {
 					if (findClosestEvader(position, detectedAgents) != null) {
 
 						Vector2 closestEvaderPos = findClosestEvader(position, detectedAgents).getPossition();
