@@ -45,6 +45,7 @@ public AABBFindAllAgentsCallback(AgentWorld world, Vector2 origin, float radius)
 		AbstractAgent agent = world.getIdMap().get(agentId);
 		Vector2 position = agent.getPossition();
 		if (position.dst(origin) < radius) {
+
 			detectedAgents.add(agent);
 		}
 

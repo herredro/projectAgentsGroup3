@@ -1,6 +1,9 @@
 package factorys;
 
 import game.AgentSimulatorConstants;
+
+import java.util.HashMap;
+
 import ui.rendering.RenderComponent;
 import agentDefinitions.Obstacles;
 
@@ -14,10 +17,13 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class ObstacleFactory {
 	private World physicsWorld;
+	private static int obstaclesIdNumber = 1000;
+	private HashMap<Integer, Obstacles> idMap;
 
-	public ObstacleFactory(World physicsWorld) {
+	public ObstacleFactory(World physicsWorld, HashMap<Integer, Obstacles> idMap) {
 		super();
 		this.physicsWorld = physicsWorld;
+		this.idMap = idMap;
 	}
 
 	public Obstacles createObstacle(Vector2[] listOfVertices, Vector2 position) {
@@ -36,14 +42,17 @@ public class ObstacleFactory {
 		fixtureDef.shape = obstacleShape;
 		fixtureDef.filter.groupIndex = AgentSimulatorConstants.GROUP_Obstacles;
 		obstacleBody.createFixture(fixtureDef);
+		// boolean isObstacle = true;
+		// obstacleBody.setUserData(new ObstacleUserData());
 		// Clean up after ourselves
-
 		obstacleShape.dispose();
 
 		RenderComponent renderComp = new RenderComponent(obstacleBody, null);
 
 		Obstacles obstacle = new Obstacles(obstacleBody, renderComp, listOfVertices);
-
+		Integer id = (Integer) obstacleBody.getUserData();
+		// idMap.put(id, obstacle);
+		// obstaclesIdNumber++;
 		return obstacle;
 
 	}

@@ -2,13 +2,14 @@ package game.systems.systemUtil;
 
 import java.util.ArrayList;
 
-import agentDefinitions.AbstractAgent;
 import agentDefinitions.AgentWorld;
+import agentDefinitions.Obstacles;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.QueryCallback;
 
+// TRY OUT CLASS // ISNT USED
 public class AABBFindAllObstaclesCallBack implements QueryCallback {
 
 	/** The game world, used for entity retrieval in order to pass them to the predicate */
@@ -20,33 +21,33 @@ public class AABBFindAllObstaclesCallBack implements QueryCallback {
 	/** The radius for the search (this is needed because the query is run on a rectangle) */
 	private float radius;
 
-	private ArrayList<AbstractAgent> detectedAgents;
+	private ArrayList<Obstacles> detectedObstacles;
 
 	public AABBFindAllObstaclesCallBack(AgentWorld world, Vector2 origin, float radius) {
 		this.world = world;
 		this.origin = origin;
 		this.radius = radius;
-		detectedAgents = new ArrayList<AbstractAgent>();
+		detectedObstacles = new ArrayList<Obstacles>();
 	}
 
 	@Override
 	public boolean reportFixture(Fixture fixture) {
-		Integer agentId = (Integer) fixture.getUserData();
-		if (agentId == null) {
-			// Fixture was not an agent
+		Integer obstacleId = (Integer) fixture.getUserData();
+		if (obstacleId == null) {
+			// Fixture was not an obstacle
 			return true;
 		}
 
-		AbstractAgent agent = world.getIdMap().get(agentId);
-		Vector2 position = agent.getPossition();
+		Obstacles obs = world.getObstacleIdMap().get(obstacleId);
+		Vector2 position = obs.getPhysicsBody().getPosition();
 		if (position.dst(origin) < radius) {
-			detectedAgents.add(agent);
+			detectedObstacles.add(obs);
 		}
 
 		return true;
 	}
 
-	public ArrayList<AbstractAgent> getDetectedAgents() {
-		return detectedAgents;
+	public ArrayList<Obstacles> getDetectedAgents() {
+		return detectedObstacles;
 	}
 }

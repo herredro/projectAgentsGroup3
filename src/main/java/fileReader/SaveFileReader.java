@@ -28,7 +28,7 @@ public class SaveFileReader {
 			e.printStackTrace();
 		}
 		this.world = world;
-		this.factory = new ObstacleFactory(world.getPhysicsWorld());
+		this.factory = new ObstacleFactory(world.getPhysicsWorld(), world.getObstacleIdMap());
 	}
 
 	public void loadObstacles() {

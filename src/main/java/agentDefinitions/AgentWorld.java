@@ -13,6 +13,8 @@ public class AgentWorld {
 
 	private HashMap<Integer, AbstractAgent> idMap;
 
+	private HashMap<Integer, Obstacles> obstacleIdMap;
+
 	private ArrayList<Obstacles> obstacList ;
 
 
@@ -21,6 +23,7 @@ public class AgentWorld {
 		obstacList= new ArrayList<Obstacles>();
 		allAgents= new ArrayList<AbstractAgent>();
 		idMap = new HashMap<Integer, AbstractAgent>();
+		obstacleIdMap = new HashMap<Integer, Obstacles>();
 		setPhysicsWorld(new World(new Vector2(), true));
 		
 
@@ -58,6 +61,10 @@ public class AgentWorld {
 	// debug method
 	public void setPhysicsWorld(World physicsWorld) {
 		this.physicsWorld = physicsWorld;
+	}
+
+	public HashMap<Integer, Obstacles> getObstacleIdMap() {
+		return obstacleIdMap;
 	}
 
 	public HashMap<Integer, AbstractAgent> getIdMap() {

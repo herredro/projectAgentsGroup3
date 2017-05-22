@@ -19,10 +19,7 @@ public class SwarmAi {
 	private DetectionSystem detectionSystem;
 	private long startOfSim;
 	private final long targetUpdateRate = AgentSimulatorConstants.aiDecisionsUpdate;
-
-	// private final int seperationMagn = 1;
-	// private final int followMagn = 1;
-	// private final int randomMagn = 1;
+	private ObstacleEvasionCalculator  obstacleEvasionCalculator;
 
 
 	public SwarmAi() {
@@ -30,6 +27,7 @@ public class SwarmAi {
 		this.detectionSystem = new DetectionSystem();
 		startOfSim = System.currentTimeMillis();
 		deathDistance = AgentSimulatorConstants.deathRadius;
+		this.obstacleEvasionCalculator= new ObstacleEvasionCalculator();
 
 	}
 	
@@ -47,18 +45,19 @@ public class SwarmAi {
 				detectedAgents.remove(agent);
 
 				if (agent.getClass() == PersuerAgent.class) {
-					// System.out.println("start");
+				
 
 					Vector2 followDetectedComponent = calculateFollowComponent(position, detectedAgents);
 					Vector2 seperationComponent = calculateSeperationComponent(position, detectedAgents);
-					// System.out.println(seperationComponent);
+					Vector2 avoidObsComponent = obstacleEvasionCalculator.calculateComp(agent, world);
+					// Vector2 avoidObsComponent = new Vector2();
 					EvaderAgent targetAgent = (EvaderAgent) findClosestEvader(position, detectedAgents);
-
+					
 					if (targetAgent != null) {
 							// System.out.println(agent.getAgentState());
 
-						agent.setDirection(weightedSumComponentsPersuit(followDetectedComponent, seperationComponent,
-								0.5));
+						agent.setDirection(weightedSumComponentsPersuit(followDetectedComponent, seperationComponent,avoidObsComponent,
+ 2));
 						agent.setAgentState(AgentState.PERSUER_PERSUIT);
 
 							// Remove DeadAgents
@@ -71,7 +70,7 @@ public class SwarmAi {
 
 						agent.setAgentState(AgentState.PERSUER_SEARCH);
 
-						Vector2 destination = weightedSumComponentsSearch(seperationComponent, 5);
+						Vector2 destination = weightedSumComponentsSearch(seperationComponent, avoidObsComponent, 30);
 
 						agent.setDirection(destination);
 				}
@@ -84,20 +83,27 @@ public class SwarmAi {
 	}
 
 
-	private Vector2 weightedSumComponentsPersuit(Vector2 followDetected, Vector2 seperation, double randomScale) {
+	private Vector2 weightedSumComponentsPersuit(Vector2 followDetected, Vector2 seperation,Vector2 obsAvoid ,double randomScale) {
 
 
 		Vector2 sum = new Vector2();
-		sum = followDetected.cpy().nor().scl(1)
-				.add(seperation.cpy().scl((float) 10).add(calculateRandomComponent().nor().scl((float) randomScale)));
+		sum = followDetected
+				.cpy()
+				.nor()
+				.scl(100)
+				.add(seperation.cpy().scl((float) 100).add(calculateRandomComponent().nor().scl((float) randomScale))
+						.add(obsAvoid.scl((float) 20)));
+		
 		return sum;
 
 	}
 
-	private Vector2 weightedSumComponentsSearch(Vector2 seperation, double randomScale) {
+	private Vector2 weightedSumComponentsSearch(Vector2 seperation,Vector2 obsAvoid , double randomScale) {
 
 		Vector2 sum = new Vector2();
-		sum = (seperation.cpy().scl((float) 5).add(calculateRandomComponent().nor().scl((float) randomScale)));
+		sum = (seperation.cpy().scl((float) 100).add(calculateRandomComponent().nor().scl((float) randomScale))
+				.add(obsAvoid.scl((float) 50)));
+
 		return sum;
 
 	}

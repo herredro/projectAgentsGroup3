@@ -1,5 +1,7 @@
 package game.systems.aiSubSystems;
 
+import game.AgentSimulatorConstants;
+
 import java.util.ArrayList;
 
 import agentDefinitions.AbstractAgent;
@@ -16,12 +18,14 @@ public class MainEvaderAi {
 	private DetectionSystem detectionSystem;
 	private long startOfSim;
 	private final long targetUpdateRate = 500;
+	private ObstacleEvasionCalculator obstacleEvasionCalculator;
 
 
 	public MainEvaderAi() {
 		super();
 		this.detectionSystem = new DetectionSystem();
 		startOfSim = System.currentTimeMillis();
+		this.obstacleEvasionCalculator = new ObstacleEvasionCalculator();
 
 
 	}
@@ -43,8 +47,9 @@ public class MainEvaderAi {
 
 					Vector2 avoidanceComponent = calculateAvoidanceComponent(position, detectedAgents);
 					Vector2 seperationComponent = calculateSeperationComponent(position, detectedAgents);
-
-					Vector2 destination = weightedSumComponents(avoidanceComponent, seperationComponent);
+					Vector2 avoidObstacleComp = obstacleEvasionCalculator.calculateComp(agent, world);
+					Vector2 destination = weightedSumComponents(avoidanceComponent, seperationComponent,
+							avoidObstacleComp);
 
 					agent.setDirection(destination.scl(1));
 				}
@@ -56,10 +61,11 @@ public class MainEvaderAi {
 	}
 
 
-	private Vector2 weightedSumComponents(Vector2 avoidance, Vector2 seperation) {
+	private Vector2 weightedSumComponents(Vector2 avoidance, Vector2 seperation, Vector2 avoidObstacleComp) {
 
 		Vector2 sum = new Vector2();
-		sum = avoidance.cpy().nor().scl(10).add(seperation.cpy().nor().scl(100));
+		sum = avoidance.cpy().nor().scl(100).add(seperation.cpy().nor().scl(30).add(avoidObstacleComp.scl(1000)));
+		// System.out.println(avoidObstacleComp.len());
 		
 		return sum;
 	}
@@ -72,7 +78,10 @@ public class MainEvaderAi {
 
 	private Vector2 calculateAvoidanceComponent(Vector2 position, ArrayList<AbstractAgent> detectedAgents) {
 		Vector2 closestPercPos = findClosestPercPos(position, detectedAgents);
+		if (position.cpy().sub(closestPercPos).len() <= AgentSimulatorConstants.detectionRadius) {
 		return position.cpy().sub(closestPercPos);
+		}
+		return new Vector2();
 	}
 
 	private Vector2 findClosestPercPos(Vector2 position, ArrayList<AbstractAgent> detectedAgents) {

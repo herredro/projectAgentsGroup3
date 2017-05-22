@@ -48,7 +48,7 @@ public class AgentFactory {
 		fixtureDef.shape = circle;
 		fixtureDef.density = 0.5f;
 		fixtureDef.friction = 0f;
-		fixtureDef.restitution = 0f; // Make it bounce a little bit
+		fixtureDef.restitution = 0f;
 		fixtureDef.filter.groupIndex = AgentSimulatorConstants.GROUP_Agents;
 
 		// Create our fixture and attach it to the body

@@ -18,7 +18,7 @@ public class AgentSimulDesktop {
 
 		// Texture.setEnforcePotImages(false);
 
-		new LwjglApplication(new AgentSimulator(new File("savedmaps/testB.txt"), 100), config);
+		new LwjglApplication(new AgentSimulator(new File("savedmaps/MainTestA.txt"), 100), config);
 	}
 
 }
