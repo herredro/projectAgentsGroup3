@@ -21,6 +21,7 @@ public class SwarmAi {
 	private final long targetUpdateRate = AgentSimulatorConstants.aiDecisionsUpdate;
 	private ObstacleEvasionCalculator  obstacleEvasionCalculator;
 
+	private final float seperationRadius = 200;
 
 	public SwarmAi() {
 		super();
@@ -91,7 +92,7 @@ public class SwarmAi {
 				.cpy()
 				.nor()
 				.scl(100)
-				.add(seperation.cpy().scl((float) 100).add(calculateRandomComponent().nor().scl((float) randomScale))
+				.add(seperation.cpy().scl((float) 20).add(calculateRandomComponent().nor().scl((float) randomScale))
 						.add(obsAvoid.scl((float) 20)));
 		
 		return sum;
@@ -103,7 +104,7 @@ public class SwarmAi {
 		Vector2 sum = new Vector2();
 		sum = (seperation.cpy().scl((float) 100).add(calculateRandomComponent().nor().scl((float) randomScale))
 				.add(obsAvoid.scl((float) 50)));
-
+		// System.out.println(seperation.len());
 		return sum;
 
 	}
@@ -124,28 +125,25 @@ public class SwarmAi {
 			if (detectedAgents.get(j).getClass() == PersuerAgent.class && j != 0) {
 				Vector2 distance = position.cpy().sub(detectedAgents.get(j).getPossition().cpy());
 
-				if (distance.len() < 20) {
-					if (findClosestEvader(position, detectedAgents) != null) {
-
-						Vector2 closestEvaderPos = findClosestEvader(position, detectedAgents).getPossition();
-						if ((position.cpy().sub(closestEvaderPos.cpy()).len() < detectedAgents.get(j).getPossition()
-								.cpy().sub(closestEvaderPos.cpy()).len())) {
-
-							return new Vector2();
-
-						}
-					}
+				if (distance.len() < seperationRadius) {
+					// if (findClosestEvader(position, detectedAgents) != null) {
+					//
+					// Vector2 closestEvaderPos = findClosestEvader(position, detectedAgents).getPossition();
+					// if ((position.cpy().sub(closestEvaderPos.cpy()).len() < detectedAgents.get(j).getPossition()
+					// .cpy().sub(closestEvaderPos.cpy()).len())) {
+					//
+					// return new Vector2();
+					//
+					// }
+					// }
 					// System.out.println(distance.len());
-					if (distance.len() == 0) {
-
-						seperation.add(new Vector2((float) ((int) 100 * (1 - 2 * Math.random())),
-								(float) ((int) 100 * (1 - 2 * Math.random()))));
+					// if (distance.len() == 0) {
 						// counter++;
-					} else {
+					// } else {
 					seperation.add(distance.cpy());
 						// System.out.println(seperation.len());
 						// counter++;
-					}
+					// }
 				}
 				
 			}
