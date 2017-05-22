@@ -103,7 +103,7 @@ public class SwarmAi {
 
 		Vector2 sum = new Vector2();
 		sum = (seperation.cpy().scl((float) 100).add(calculateRandomComponent().nor().scl((float) randomScale))
-				.add(obsAvoid.scl((float) 50)));
+				.add(obsAvoid.scl((float) 100)));
 		// System.out.println(seperation.len());
 		return sum;
 
