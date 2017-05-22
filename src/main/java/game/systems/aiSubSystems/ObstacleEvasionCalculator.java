@@ -28,7 +28,7 @@ public class ObstacleEvasionCalculator {
 	public Vector2 calculateComp(AbstractAgent agent, AgentWorld world) {
 
 
-
+		System.out.println("start obs avoid calc");
 		Vector2 ret = new Vector2();
 		for (int i = 0; i < 4; i++) {
 
@@ -45,13 +45,15 @@ public class ObstacleEvasionCalculator {
 			if (rayCast.getDetectedObstacle() == null) {
 
 			} else {
-				if (agent.getPossition().cpy().sub(rayCast.getDetectedObstacle().cpy()).len() <= 200) {
-				ret = ret.add(rayCast.getDetectedObstacle().sub(agent.getPossition().cpy()));
+				Vector2 agentToColision = (agent.getPossition().cpy().sub(rayCast.getDetectedObstacle().cpy()));
+				if (agentToColision.len() <= 400) {
+					Vector2 addComponent = agentToColision.scl(400 / agentToColision.len());
+					ret = ret.cpy().add(addComponent);
 					System.out.println("avoidance detected");
 				}
 			}
 		}
-		// System.out.println(ret.len());
+		System.out.println(ret.len());
 		return ret.nor().scl(-1);
 	}
 

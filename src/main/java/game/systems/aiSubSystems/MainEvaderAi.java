@@ -64,7 +64,7 @@ public class MainEvaderAi {
 	private Vector2 weightedSumComponents(Vector2 avoidance, Vector2 seperation, Vector2 avoidObstacleComp) {
 
 		Vector2 sum = new Vector2();
-		sum = avoidance.cpy().nor().scl(100).add(seperation.cpy().nor().scl(30).add(avoidObstacleComp.scl(1000)));
+		sum = avoidance.cpy().nor().scl(100).add(seperation.cpy().nor().scl(0).add(avoidObstacleComp.scl(1000)));
 		// System.out.println(avoidObstacleComp.len());
 		
 		return sum;

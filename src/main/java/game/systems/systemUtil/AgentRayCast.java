@@ -22,10 +22,11 @@ public class AgentRayCast implements com.badlogic.gdx.physics.box2d.RayCastCallb
 		if (agentId == null) {
 
 			detectedObstacle = point.cpy();
+			System.out.println(point);
 			return fraction;
 		}
 
-		return 1;
+		return -1;
 
 	}
 
