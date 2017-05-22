@@ -10,7 +10,8 @@ import agentDefinitions.AgentWorld;
 import com.badlogic.gdx.math.Vector2;
 
 public class ObstacleEvasionCalculator {
-	ArrayList<Vector2> dirList;
+	private ArrayList<Vector2> dirList;
+	private int obstacleDetRAdius = 100;
 
 	public ObstacleEvasionCalculator() {
 		dirList = new ArrayList<Vector2>();
@@ -36,7 +37,7 @@ public class ObstacleEvasionCalculator {
 
 		Vector2 startPoint = agent.getPossition().cpy().add(new Vector2((float) 0.1,(float) 0.1));
 
-			Vector2 endPoint = startPoint.cpy().add((dirList.get(i).cpy()).scl(50));
+			Vector2 endPoint = startPoint.cpy().add((dirList.get(i).cpy()).scl(obstacleDetRAdius));
 			AgentRayCast rayCast = new AgentRayCast(world);
 
 			world.getPhysicsWorld().rayCast(rayCast, startPoint, endPoint);
@@ -47,8 +48,8 @@ public class ObstacleEvasionCalculator {
 			} else {
 				// System.out.println("maybe here");
 				Vector2 agentToColision = (agent.getPossition().cpy().sub(rayCast.getDetectedObstacle().cpy()));
-				if (agentToColision.len() <= 50) {
-					Vector2 addComponent = agentToColision.scl(50 / agentToColision.len());
+				if (agentToColision.len() <= obstacleDetRAdius) {
+					Vector2 addComponent = agentToColision.scl(obstacleDetRAdius / agentToColision.len());
 					ret = ret.cpy().add(addComponent);
 					// System.out.println("avoidance detected " + dirList.get(i));
 				}

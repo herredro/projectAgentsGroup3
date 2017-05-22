@@ -43,8 +43,8 @@ public class AgentSimulationScreen implements Screen {
 		// addAgents(AgentType.EVADER, 10, 200, 200);
 		// addAgents(AgentType.EVADER, 20, 200, -200);
 		addAgents(AgentType.PERSUER, 10, -200, -200);
-		addAgents(AgentType.EVADER, 10, -150, -200);
-		addAgents(AgentType.EVADER, 10, 200, 200);
+		addAgents(AgentType.EVADER, 10, -100, -200);
+		// addAgents(AgentType.EVADER, 10, 200, 200);
 
 	}
 
