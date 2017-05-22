@@ -68,7 +68,7 @@ public class MainEvaderAi {
  Vector2 sepr) {
 
 		Vector2 sum = new Vector2();
-		sum = avoidance.cpy().nor().scl(100).add(random.cpy().nor().scl(20).add(avoidObstacleComp.scl(50)))
+		sum = avoidance.cpy().nor().scl(100).add(random.cpy().nor().scl(20).add(avoidObstacleComp.scl(80)))
 				.add((sepr).nor().scl(50));
 		// System.out.println(sepr.len());
 		
@@ -84,7 +84,7 @@ public class MainEvaderAi {
 	private Vector2 calculateAvoidanceComponent(Vector2 position, ArrayList<AbstractAgent> detectedAgents) {
 		Vector2 closestPercPos = findClosestPercPos(position, detectedAgents);
 		if (position.cpy().sub(closestPercPos).len() <= AgentSimulatorConstants.detectionRadius) {
-		return position.cpy().sub(closestPercPos);
+			return position.cpy().sub(closestPercPos).scl(-1);
 		}
 		return new Vector2();
 	}

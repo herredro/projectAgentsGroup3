@@ -39,9 +39,12 @@ public class AgentSimulationScreen implements Screen {
 		saveLoader.setScaleFactor(scale);
 		saveLoader.loadObstacles();
 		// creatBoxBoarder();
-		addAgents(AgentType.PERSUER, 20, -200, -200);
+		// addAgents(AgentType.PERSUER, 20, -200, -200);
+		// addAgents(AgentType.EVADER, 10, 200, 200);
+		// addAgents(AgentType.EVADER, 20, 200, -200);
+		addAgents(AgentType.PERSUER, 10, -200, -200);
+		addAgents(AgentType.EVADER, 10, -150, -200);
 		addAgents(AgentType.EVADER, 10, 200, 200);
-		// addAgents(AgentType.EVADER, 20, -100, -100);
 
 	}
 

@@ -58,7 +58,7 @@ public class SwarmAi {
 							// System.out.println(agent.getAgentState());
 
 						agent.setDirection(weightedSumComponentsPersuit(followDetectedComponent, seperationComponent,avoidObsComponent,
- 2));
+ 20));
 						agent.setAgentState(AgentState.PERSUER_PERSUIT);
 
 							// Remove DeadAgents
@@ -92,7 +92,7 @@ public class SwarmAi {
 				.cpy()
 				.nor()
 				.scl(100)
-				.add(seperation.cpy().scl((float) 20).add(calculateRandomComponent().nor().scl((float) randomScale))
+				.add(seperation.cpy().scl((float) 70).add(calculateRandomComponent().nor().scl((float) randomScale))
 						.add(obsAvoid.scl((float) 20)));
 		
 		return sum;
