@@ -12,14 +12,14 @@ public class AgentSimulatorConstants {
 	public static final short GROUP_Obstacles = -2;
 
 	// radius of agent sight
-	public static final float detectionRadius = 200;
+	public static final float detectionRadius = 2000;
 	// if <= this range evaders get removed
 	public static final int deathRadius = 25;
 
 	// time in milliseconds
 	public static final int aiDecisionsUpdate = 500;
 	// Agent Velocity
-	public static final int maxVelosity = 15;
+	public static final int maxVelosity = 20;
 
 	public static final int maxVelosityEvaders = 20;
 

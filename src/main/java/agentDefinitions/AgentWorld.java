@@ -17,6 +17,7 @@ public class AgentWorld {
 
 	private ArrayList<Obstacles> obstacList ;
 
+	private boolean isRunning;
 
 
 	public AgentWorld() {
@@ -25,6 +26,7 @@ public class AgentWorld {
 		idMap = new HashMap<Integer, AbstractAgent>();
 		obstacleIdMap = new HashMap<Integer, Obstacles>();
 		setPhysicsWorld(new World(new Vector2(), true));
+		setRunning(true);
 		
 
 	}
@@ -69,6 +71,16 @@ public class AgentWorld {
 
 	public HashMap<Integer, AbstractAgent> getIdMap() {
 		return idMap;
+	}
+
+
+	public boolean isRunning() {
+		return isRunning;
+	}
+
+
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
 	}
 
 }

@@ -57,8 +57,8 @@ public class SwarmAi {
 					if (targetAgent != null) {
 							// System.out.println(agent.getAgentState());
 
-						agent.setDirection(weightedSumComponentsPersuit(followDetectedComponent, seperationComponent,avoidObsComponent,
- 20));
+						agent.setDirection(weightedSumComponentsPersuit(followDetectedComponent, seperationComponent,
+								avoidObsComponent, 30));
 						agent.setAgentState(AgentState.PERSUER_PERSUIT);
 
 							// Remove DeadAgents
@@ -71,7 +71,7 @@ public class SwarmAi {
 
 						agent.setAgentState(AgentState.PERSUER_SEARCH);
 
-						Vector2 destination = weightedSumComponentsSearch(seperationComponent, avoidObsComponent, 30);
+						Vector2 destination = weightedSumComponentsSearch(seperationComponent, avoidObsComponent, 80);
 
 						agent.setDirection(destination);
 				}
@@ -92,8 +92,8 @@ public class SwarmAi {
 				.cpy()
 				.nor()
 				.scl(100)
-				.add(seperation.cpy().scl((float) 70).add(calculateRandomComponent().nor().scl((float) randomScale))
-						.add(obsAvoid.scl((float) 20)));
+				.add(seperation.cpy().scl((float) 40).add(calculateRandomComponent().nor().scl((float) randomScale))
+						.add(obsAvoid.scl((float) 40)));
 		
 		return sum;
 
@@ -102,8 +102,8 @@ public class SwarmAi {
 	private Vector2 weightedSumComponentsSearch(Vector2 seperation,Vector2 obsAvoid , double randomScale) {
 
 		Vector2 sum = new Vector2();
-		sum = (seperation.cpy().scl((float) 100).add(calculateRandomComponent().nor().scl((float) randomScale))
-				.add(obsAvoid.scl((float) 100)));
+		sum = (seperation.cpy().scl((float) 150).add(calculateRandomComponent().nor().scl((float) randomScale))
+				.add(obsAvoid.scl((float) 80)));
 		// System.out.println(seperation.len());
 		return sum;
 
@@ -126,24 +126,8 @@ public class SwarmAi {
 				Vector2 distance = position.cpy().sub(detectedAgents.get(j).getPossition().cpy());
 
 				if (distance.len() < seperationRadius) {
-					// if (findClosestEvader(position, detectedAgents) != null) {
-					//
-					// Vector2 closestEvaderPos = findClosestEvader(position, detectedAgents).getPossition();
-					// if ((position.cpy().sub(closestEvaderPos.cpy()).len() < detectedAgents.get(j).getPossition()
-					// .cpy().sub(closestEvaderPos.cpy()).len())) {
-					//
-					// return new Vector2();
-					//
-					// }
-					// }
-					// System.out.println(distance.len());
-					// if (distance.len() == 0) {
-						// counter++;
-					// } else {
+
 					seperation.add(distance.cpy());
-						// System.out.println(seperation.len());
-						// counter++;
-					// }
 				}
 				
 			}

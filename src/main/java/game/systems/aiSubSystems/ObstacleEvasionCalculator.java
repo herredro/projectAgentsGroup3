@@ -1,6 +1,6 @@
 package game.systems.aiSubSystems;
 
-import game.systems.systemUtil.AgentRayCast;
+import game.systems.systemUtil.AgentRayCastObstacles;
 
 import java.util.ArrayList;
 
@@ -38,7 +38,7 @@ public class ObstacleEvasionCalculator {
 		Vector2 startPoint = agent.getPossition().cpy().add(new Vector2((float) 0.1,(float) 0.1));
 
 			Vector2 endPoint = startPoint.cpy().add((dirList.get(i).cpy()).scl(obstacleDetRAdius));
-			AgentRayCast rayCast = new AgentRayCast(world);
+			AgentRayCastObstacles rayCast = new AgentRayCastObstacles(world);
 
 			world.getPhysicsWorld().rayCast(rayCast, startPoint, endPoint);
 

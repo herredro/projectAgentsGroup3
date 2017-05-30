@@ -68,10 +68,8 @@ public class MainEvaderAi {
  Vector2 sepr) {
 
 		Vector2 sum = new Vector2();
-		sum = avoidance.cpy().nor().scl(100).add(random.cpy().nor().scl(10).add(avoidObstacleComp.scl(50)))
+		sum = avoidance.cpy().nor().scl(100).add(random.cpy().nor().scl(10)).add(avoidObstacleComp.scl(90))
 				.add((sepr).nor().scl(30));
-		// System.out.println(sepr.len());
-		// System.out.println(avoidance);
 		return sum;
 	}
 

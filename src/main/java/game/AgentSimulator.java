@@ -3,6 +3,7 @@ package game;
 import java.io.File;
 
 import ui.screens.AgentSimulationScreen;
+import agentDefinitions.AgentWorld;
 
 import com.badlogic.gdx.Game;
 
@@ -24,6 +25,9 @@ public class AgentSimulator extends Game {
 		setScreen(gameScreen);
 	}
 
+	public AgentWorld getAgentWorld() {
+		return gameScreen.getWorld();
+	}
 
 
 }

@@ -42,10 +42,14 @@ public class AgentSimulationScreen implements Screen {
 		// addAgents(AgentType.PERSUER, 20, -200, -200);
 		// addAgents(AgentType.EVADER, 10, 200, 200);
 		// addAgents(AgentType.EVADER, 20, 200, -200);
-		addAgents(AgentType.PERSUER, 10, -200, -200);
-		addAgents(AgentType.EVADER, 10, -100, -200);
-		addAgents(AgentType.EVADER, 10, 200, 200);
+		addAgents(AgentType.PERSUER, 15, -200, -200);
+		// addAgents(AgentType.EVADER, 10, -100, -200);
+		addAgents(AgentType.EVADER, 16, 200, 200);
 
+	}
+
+	public AgentWorld getWorld() {
+		return world;
 	}
 
 	private void addAgents(AgentType type, int count, int x, int y) {

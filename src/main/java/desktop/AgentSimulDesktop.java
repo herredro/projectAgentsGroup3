@@ -16,9 +16,14 @@ public class AgentSimulDesktop {
 		config.width = agentScreenWidth;
 		config.height = agentScreenHeight;
 
-		// Texture.setEnforcePotImages(false);
 
-		new LwjglApplication(new AgentSimulator(new File("savedmaps/TestC.txt"), 120), config);
+
+		AgentSimulator agentSim = new AgentSimulator(new File("savedmaps/TestC.txt"), 120);
+
+		LwjglApplication app = new LwjglApplication(agentSim, config);
+
+	
+
 	}
 
 }
