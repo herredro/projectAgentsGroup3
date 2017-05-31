@@ -1,5 +1,6 @@
 package game.systems.aiSubSystems;
 
+import static game.systems.aiSubSystems.CoefficientFactory.USED_PURSUER_COEFFICIENTS;
 import game.AgentSimulatorConstants;
 
 import java.util.ArrayList;
@@ -29,7 +30,6 @@ public class SwarmAi {
 		startOfSim = System.currentTimeMillis();
 		deathDistance = AgentSimulatorConstants.deathRadius;
 		this.obstacleEvasionCalculator= new ObstacleEvasionCalculator();
-
 	}
 	
 	
@@ -58,7 +58,7 @@ public class SwarmAi {
 							// System.out.println(agent.getAgentState());
 
 						agent.setDirection(weightedSumComponentsPersuit(followDetectedComponent, seperationComponent,
-								avoidObsComponent, 30));
+								avoidObsComponent, USED_PURSUER_COEFFICIENTS.getPursuitCoefs().getRandomComponentCoef()));
 						agent.setAgentState(AgentState.PERSUER_PERSUIT);
 
 							// Remove DeadAgents
@@ -71,7 +71,8 @@ public class SwarmAi {
 
 						agent.setAgentState(AgentState.PERSUER_SEARCH);
 
-						Vector2 destination = weightedSumComponentsSearch(seperationComponent, avoidObsComponent, 80);
+						Vector2 destination = weightedSumComponentsSearch(seperationComponent, avoidObsComponent,
+								USED_PURSUER_COEFFICIENTS.getSearchCoefs().getRandomComponentCoef());
 
 						agent.setDirection(destination);
 				}
@@ -91,19 +92,22 @@ public class SwarmAi {
 		sum = followDetected
 				.cpy()
 				.nor()
-				.scl(100)
-				.add(seperation.cpy().scl((float) 40).add(calculateRandomComponent().nor().scl((float) randomScale))
-						.add(obsAvoid.scl((float) 40)));
+				.scl(USED_PURSUER_COEFFICIENTS.getPursuitCoefs().getFollowDetectedCoef())
+				.add(seperation.cpy().scl((float) USED_PURSUER_COEFFICIENTS.getPursuitCoefs().getSeparationCoef())
+						.add(calculateRandomComponent().nor().scl((float) randomScale))
+						.add(obsAvoid.scl((float) USED_PURSUER_COEFFICIENTS.getPursuitCoefs()
+								.getObstacleAvoidanceCoef())));
 		
 		return sum;
 
 	}
 
-	private Vector2 weightedSumComponentsSearch(Vector2 seperation,Vector2 obsAvoid , double randomScale) {
+	private Vector2 weightedSumComponentsSearch(Vector2 seperation, Vector2 obsAvoid, double randomScale) {
 
 		Vector2 sum = new Vector2();
-		sum = (seperation.cpy().scl((float) 150).add(calculateRandomComponent().nor().scl((float) randomScale))
-				.add(obsAvoid.scl((float) 80)));
+		sum = (seperation.cpy().scl((float) USED_PURSUER_COEFFICIENTS.getSearchCoefs().getSeparationCoef())
+				.add(calculateRandomComponent().nor().scl((float) randomScale)).add(obsAvoid
+				.scl((float) USED_PURSUER_COEFFICIENTS.getSearchCoefs().getObstacleAvoidanceCoef())));
 		// System.out.println(seperation.len());
 		return sum;
 

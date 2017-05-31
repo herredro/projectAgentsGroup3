@@ -1,5 +1,6 @@
 package game.systems.aiSubSystems;
 
+import static game.systems.aiSubSystems.CoefficientFactory.USED_EVADER_COEFFICIENTS;
 import game.AgentSimulatorConstants;
 
 import java.util.ArrayList;
@@ -13,22 +14,17 @@ import com.badlogic.gdx.math.Vector2;
 
 public class MainEvaderAi {
 	
-
-
 	private DetectionSystem detectionSystem;
 	private long startOfSim;
 	private final long targetUpdateRate = 500;
 	private ObstacleEvasionCalculator obstacleEvasionCalculator;
-	private float seperationRadius = 40;
-
+	private float seperationRadius = 60;
 
 	public MainEvaderAi() {
 		super();
 		this.detectionSystem = new DetectionSystem();
 		startOfSim = System.currentTimeMillis();
 		this.obstacleEvasionCalculator = new ObstacleEvasionCalculator();
-
-
 	}
 	
 	
@@ -47,11 +43,11 @@ public class MainEvaderAi {
 				if (agent.getClass() == EvaderAgent.class) {
 
 					Vector2 avoidanceComponent = calculateAvoidanceComponent(position, detectedAgents);
-					Vector2 seperationComponent = calculateRandomComponent(position, detectedAgents);
+					Vector2 randomComponent = calculateRandomComponent(position, detectedAgents);
 					Vector2 avoidObstacleComp = obstacleEvasionCalculator.calculateComp(agent, world);
-					Vector2 sepeVector2 = calculateSeperationComponent(position, detectedAgents);
-					Vector2 destination = weightedSumComponents(avoidanceComponent, seperationComponent,
-							avoidObstacleComp, sepeVector2);
+					Vector2 separationComponent = calculateSeperationComponent(position, detectedAgents);
+					Vector2 destination = weightedSumComponents(avoidanceComponent, randomComponent,
+							avoidObstacleComp, separationComponent);
 					
 
 					agent.setDirection(destination.scl(1));
@@ -68,8 +64,10 @@ public class MainEvaderAi {
  Vector2 sepr) {
 
 		Vector2 sum = new Vector2();
-		sum = avoidance.cpy().nor().scl(100).add(random.cpy().nor().scl(10)).add(avoidObstacleComp.scl(90))
-				.add((sepr).nor().scl(30));
+		sum = avoidance.cpy().nor().scl(USED_EVADER_COEFFICIENTS.getEvasionCoefs().getAvoidCoef())
+				.add(random.cpy().nor().scl(USED_EVADER_COEFFICIENTS.getEvasionCoefs().getRandomComponentCoef()))
+				.add(avoidObstacleComp.scl(USED_EVADER_COEFFICIENTS.getEvasionCoefs().getObstacleAvoidanceCoef()))
+				.add((sepr).nor().scl(USED_EVADER_COEFFICIENTS.getEvasionCoefs().getSeparationCoef()));
 		return sum;
 	}
 

@@ -2,21 +2,18 @@ package ui.screens;
 
 import static game.AgentSimulatorConstants.agentScreenHeight;
 import static game.AgentSimulatorConstants.agentScreenWidth;
-import factorys.AgentFactory;
+import factorys.PopulateWorld;
 import fileReader.SaveFileReader;
 import game.systems.SystemsManager;
 
 import java.io.File;
 
-import agentDefinitions.AbstractAgent;
-import agentDefinitions.AgentType;
 import agentDefinitions.AgentWorld;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
 
 public class AgentSimulationScreen implements Screen {
 
@@ -39,28 +36,12 @@ public class AgentSimulationScreen implements Screen {
 		saveLoader.setScaleFactor(scale);
 		saveLoader.loadObstacles();
 		// creatBoxBoarder();
-		// addAgents(AgentType.PERSUER, 20, -200, -200);
-		// addAgents(AgentType.EVADER, 10, 200, 200);
-		// addAgents(AgentType.EVADER, 20, 200, -200);
-		addAgents(AgentType.PERSUER, 15, -200, -200);
-		// addAgents(AgentType.EVADER, 10, -100, -200);
-		addAgents(AgentType.EVADER, 16, 200, 200);
-
+		PopulateWorld.addAllAgents(world);
 	}
 
 	public AgentWorld getWorld() {
 		return world;
 	}
-
-	private void addAgents(AgentType type, int count, int x, int y) {
-		AgentFactory factory = new AgentFactory(world.getPhysicsWorld(), world.getIdMap());
-		for (int i = 1; i <= count; i++) {
-			AbstractAgent agent = factory.createAgent(new Vector2(x, y), type);
-			world.addAgent(agent);
-		}
-
-	}
-
 
 
 	public void show() {

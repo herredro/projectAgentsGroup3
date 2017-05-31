@@ -21,7 +21,7 @@ public class SystemsManager {
 		systemList.add(new MovementSystem());
 		systemList.add(new RenderSystem(camera, world));
 		systemList.add(new RemoveDeadAgents());
-		
+		systemList.add(new ResetSimulationSystem());
 
 	}
 
