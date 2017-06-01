@@ -18,7 +18,7 @@ public class MainEvaderAi {
 	private long startOfSim;
 	private final long targetUpdateRate = 500;
 	private ObstacleEvasionCalculator obstacleEvasionCalculator;
-	private float seperationRadius = 60;
+	private float seperationRadius = 40;
 
 	public MainEvaderAi() {
 		super();

@@ -41,7 +41,7 @@ public class AgentFactory {
 		Body agentBody = physicsWorld.createBody(agentBodyDef);
 
 		CircleShape circle = new CircleShape();
-		circle.setRadius(5f);
+		circle.setRadius(1f);
 
 		// Create a fixture definition to apply our shape to
 		FixtureDef fixtureDef = new FixtureDef();

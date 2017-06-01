@@ -2,9 +2,9 @@ package game.systems.aiSubSystems;
 
 public class PursuerSearchCoefficients {
 
-	private float separationCoef = 70;
+	private float separationCoef = 45;
 
-	private float obstacleAvoidanceCoef = 20;
+	private float obstacleAvoidanceCoef = 45;
 
 	private float randomComponentCoef = 10;
 

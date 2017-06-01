@@ -2,13 +2,13 @@ package game.systems.aiSubSystems;
 
 public class EvaderEvasionCoefficients {
 
-	private float avoidCoef = 30;
+	private float avoidCoef = 100;
 
-	private float separationCoef = 15;
+	private float separationCoef = 30;
 
-	private float obstacleAvoidanceCoef = 50;
+	private float obstacleAvoidanceCoef = 95;
 
-	private float randomComponentCoef = 5;
+	private float randomComponentCoef = 30;
 
 	public EvaderEvasionCoefficients() {
 

@@ -10,7 +10,7 @@ public class PopulateWorld {
 
 	public static void addAllAgents(AgentWorld world) {
 		addAgents(world, AgentType.PERSUER, 10, -200, -200);
-		addAgents(world, AgentType.EVADER, 10, 200, 200);
+		addAgents(world, AgentType.EVADER, 10, 200, 100);
 	}
 
 	private static void addAgents(AgentWorld world, AgentType type, int count, int x, int y) {

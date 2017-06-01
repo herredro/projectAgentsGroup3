@@ -19,10 +19,18 @@ public class ObstacleEvasionCalculator {
 		Vector2 rayCastDir2 = new Vector2(1, 0);
 		Vector2 rayCastDir3 = new Vector2(0, -1);
 		Vector2 rayCastDir4 = new Vector2(-1, 0);
+		Vector2 rayCastDir5 = new Vector2(-1, -1);
+		Vector2 rayCastDir6 = new Vector2(-1, 1);
+		Vector2 rayCastDir7 = new Vector2(1, -1);
+		Vector2 rayCastDir8 = new Vector2(1, 1);
 		dirList.add(rayCastDir1);
 		dirList.add(rayCastDir2);
 		dirList.add(rayCastDir3);
 		dirList.add(rayCastDir4);
+		dirList.add(rayCastDir5);
+		dirList.add(rayCastDir6);
+		dirList.add(rayCastDir7);
+		dirList.add(rayCastDir8);
 
 	}
 
@@ -31,7 +39,7 @@ public class ObstacleEvasionCalculator {
 
 		// System.out.println("start obs avoid calc");
 		Vector2 ret = new Vector2();
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < dirList.size(); i++) {
 
 
 

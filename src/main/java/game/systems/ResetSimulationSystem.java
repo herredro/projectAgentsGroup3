@@ -30,7 +30,7 @@ public class ResetSimulationSystem extends AbstractSystem {
 			double timeTaken = (System.currentTimeMillis() - simulationStartMs) / 1000.0;
 			timeTakenPerSimulation.add(timeTaken);
 
-			int numRunsPerExperiment = 10;
+			int numRunsPerExperiment = 20;
 			if (timeTakenPerSimulation.size() == numRunsPerExperiment) {
 				System.out.println(timeTakenPerSimulation);
 				setNewParameters();

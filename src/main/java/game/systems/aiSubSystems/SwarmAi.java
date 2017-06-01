@@ -22,7 +22,7 @@ public class SwarmAi {
 	private final long targetUpdateRate = AgentSimulatorConstants.aiDecisionsUpdate;
 	private ObstacleEvasionCalculator  obstacleEvasionCalculator;
 
-	private final float seperationRadius = 200;
+	private final float seperationRadius = 100;
 
 	public SwarmAi() {
 		super();
